@@ -1,0 +1,7 @@
+FROM ubuntu-minimal
+RUN apt-get update
+RUN printf '╔══════════════════════════════════════════════════════╗\n║                  Tensorlake Sandbox                  ║\n╚══════════════════════════════════════════════════════╝\n\n  Docs: https://docs.tensorlake.ai/sandboxes/introduction\n  Want to add a new agent harness? Checkout: https://github.com/tensorlakeai/harness-new\n\n' > /etc/motd
+RUN echo 'cat /etc/motd' >> /etc/bash.bashrc
+
+# Command to create the image in Tensorlake:
+# tl sbx image create ./Dockerfile.custom -n custom-harness-new-ui
