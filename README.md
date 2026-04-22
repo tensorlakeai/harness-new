@@ -38,7 +38,7 @@ Copy `harnesses/Dockerfile.custom` as a starting point and name it `Dockerfile.<
 cp harnesses/Dockerfile.custom harnesses/Dockerfile.<agentname>
 ```
 
-Look at the existing harnesses to understand the conventions:
+Look at the existing harnesses to understand the conventions. If you get stuck, join the [Tensorlake Slack community](https://join.slack.com/t/tensorlakecloud/shared_invite/zt-32fq4nmib-gO0OM5RIar3zLOBm~ZGqKg) and ask for help.
 
 - Use `ubuntu-minimal` as the base image (more base images coming)
 - Install your agent and make sure its binary is on `PATH` (i.e. in `/usr/local/bin`)
@@ -72,6 +72,7 @@ tl sbx ssh <sandbox-id>
 - [harness.new](https://www.harness.new) — launch and manage agent sandboxes in the browser
 - [Sandbox docs](https://docs.tensorlake.ai/sandboxes/introduction) — how sandboxes work, lifecycle, snapshots, and more
 - [Tensorlake Cloud](https://cloud.tensorlake.ai) — sign up and manage your account
+- [Slack community](https://join.slack.com/t/tensorlakecloud/shared_invite/zt-32fq4nmib-gO0OM5RIar3zLOBm~ZGqKg) — get help and connect with the team
 
 ## License
 
