@@ -57,14 +57,15 @@ Refer to the [Tensorlake sandbox docs](https://docs.tensorlake.ai/sandboxes/intr
 
 Submit a PR with your `Dockerfile.<agentname>`. The Tensorlake team will review it and, once approved, add it to [harness.new](https://www.harness.new).
 
-## Using a Harness from Your Laptop
+## Try a Harness
 
-Install the CLI, log in, and SSH into a running sandbox:
+Head to [harness.new](https://www.harness.new) to launch any of the existing harnesses instantly in your browser. Each sandbox comes with the agent pre-installed.
+
+Once running, the immersive terminal view displays your sandbox ID.
 
 ```bash
-pip install tensorlake
-tl login
-tl sbx ssh <sandbox-id>
+tl sbx ls                # list sandboxes
+tl sbx ssh <sandbox-id>  # ssh into a sandbox
 ```
 
 ## Resources
