@@ -11,6 +11,7 @@ Community-maintained Dockerfiles for agent harnesses on [harness.new](https://ww
 | Droid | `harnesses/Dockerfile.droid` |
 | ForgeCode | `harnesses/Dockerfile.forge` |
 | Goose | `harnesses/Dockerfile.goose` |
+| Hermes | `harnesses/Dockerfile.hermes` |
 | Custom | `harnesses/Dockerfile.custom` |
 
 ## Contributing a Harness
