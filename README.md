@@ -1,4 +1,4 @@
-# Harness — Agent Sandboxes for Tensorlake
+# Harness — Playground for Agent Harnesses
 
 Community-maintained Dockerfiles for agent harnesses on [harness.new](https://www.harness.new). Each harness boots a fresh, isolated Linux sandbox on [Tensorlake](https://cloud.tensorlake.ai) with the agent pre-installed and state that persists across sessions.
 
