@@ -1,0 +1,32 @@
+name: Build Harness
+
+on:
+  workflow_dispatch:
+    inputs:
+      harness_name:
+        description: 'Harness name to build (e.g., claude, goose)'
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      harness_name:
+        description: 'Harness name to build'
+        required: true
+        type: string
+    secrets:
+      TENSORLAKE_API_KEY:
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Tensorlake CLI
+        run: pip install tensorlake
+
+      - name: Build harness image
+        env:
+          TENSORLAKE_API_KEY: ${{ secrets.TENSORLAKE_API_KEY }}
+        run: tl sbx image create ./harnesses/Dockerfile.${{ inputs.harness_name }} -n ${{ inputs.harness_name }}

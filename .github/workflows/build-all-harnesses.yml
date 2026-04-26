@@ -1,0 +1,30 @@
+name: Build All Harnesses
+
+on:
+  workflow_dispatch:
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      harnesses: ${{ steps.list.outputs.harnesses }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Discover harness names
+        id: list
+        run: |
+          harnesses=$(ls harnesses/Dockerfile.* | sed 's|harnesses/Dockerfile\.||' | jq -R -s -c 'split("\n")[:-1]')
+          echo "harnesses=$harnesses" >> $GITHUB_OUTPUT
+
+  build:
+    needs: discover
+    strategy:
+      matrix:
+        harness: ${{ fromJson(needs.discover.outputs.harnesses) }}
+      fail-fast: false
+    uses: ./.github/workflows/build-harness.yml
+    with:
+      harness_name: ${{ matrix.harness }}
+    secrets:
+      TENSORLAKE_API_KEY: ${{ secrets.TENSORLAKE_API_KEY }}
