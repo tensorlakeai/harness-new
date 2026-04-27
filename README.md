@@ -8,10 +8,12 @@ Community-maintained Dockerfiles for agent harnesses on [harness.new](https://ww
 |---|---|
 | Claude Code | `harnesses/Dockerfile.claude` |
 | Codex | `harnesses/Dockerfile.codex` |
+| Custom | `harnesses/Dockerfile.custom` |
 | Droid | `harnesses/Dockerfile.droid` |
 | ForgeCode | `harnesses/Dockerfile.forge` |
 | Goose | `harnesses/Dockerfile.goose` |
-| Custom | `harnesses/Dockerfile.custom` |
+| Hermes | `harnesses/Dockerfile.hermes` |
+| Pi | `harnesses/Dockerfile.pi` |
 
 ## Contributing a Harness
 

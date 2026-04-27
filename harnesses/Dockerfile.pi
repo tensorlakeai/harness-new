@@ -1,0 +1,8 @@
+FROM ubuntu-minimal
+RUN apt-get update && apt-get install -y ca-certificates curl libssl3 && rm -rf /var/lib/apt/lists/*
+RUN npm install -g --prefix /usr/local @mariozechner/pi-coding-agent
+RUN printf '╔══════════════════════════════════════════════════════╗\n║              Tensorlake Sandbox — Pi                 ║\n╚══════════════════════════════════════════════════════╝\n\n  Docs: https://docs.tensorlake.ai/sandboxes/introduction\n  Want to add a new agent harness? Checkout: https://github.com/tensorlakeai/harness-new\n\n  To begin run:\n  $ pi\n\n' > /etc/motd
+RUN echo 'cat /etc/motd' >> /etc/bash.bashrc
+
+# Command to create the image in Tensorlake:
+# tl sbx image create ./Dockerfile.pi -n pi-harness-new-ui
