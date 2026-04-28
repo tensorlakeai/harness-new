@@ -1,6 +1,6 @@
 FROM ubuntu-minimal
 RUN apt-get update && apt-get install -y ca-certificates curl libssl3 && rm -rf /var/lib/apt/lists/*
-RUN curl -fsSL https://claude.ai/install.sh | bash && cp $HOME/.local/bin/claude /usr/local/bin/claude
+RUN curl -fsSL https://claude.ai/install.sh | bash && cp $HOME/.local/bin/claude /usr/bin/claude
 RUN printf '╔══════════════════════════════════════════════════════╗\n║             Tensorlake Sandbox — Claude              ║\n╚══════════════════════════════════════════════════════╝\n\n  Docs: https://docs.tensorlake.ai/sandboxes/introduction\n  Want to add a new agent harness? Checkout: https://github.com/tensorlakeai/harness-new\n\n  To begin run:\n  $ claude\n\n' > /etc/motd
 RUN echo 'cat /etc/motd' >> /etc/bash.bashrc
 

@@ -1,6 +1,6 @@
 FROM ubuntu-minimal
 RUN apt-get update && apt-get install -y ca-certificates curl libssl3 && rm -rf /var/lib/apt/lists/*
-RUN npm install -g --prefix /usr/local @openai/codex
+RUN npm install -g --prefix /usr @openai/codex
 RUN printf '╔══════════════════════════════════════════════════════╗\n║             Tensorlake Sandbox — Codex               ║\n╚══════════════════════════════════════════════════════╝\n\n  Docs: https://docs.tensorlake.ai/sandboxes/introduction\n  Want to add a new agent harness? Checkout: https://github.com/tensorlakeai/harness-new\n\n  To begin run:\n  $ codex\n\n' > /etc/motd
 RUN echo 'cat /etc/motd' >> /etc/bash.bashrc
 

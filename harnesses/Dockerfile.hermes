@@ -1,6 +1,6 @@
 FROM ubuntu-minimal
 RUN apt-get update && apt-get install -y ca-certificates curl libssl3 && rm -rf /var/lib/apt/lists/*
-RUN curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash -s -- --skip-setup
+RUN curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash -s -- --skip-setup && mv /usr/local/bin/hermes /usr/bin/hermes
 RUN printf '╔══════════════════════════════════════════════════════╗\n║             Tensorlake Sandbox — Hermes              ║\n╚══════════════════════════════════════════════════════╝\n\n  Docs: https://docs.tensorlake.ai/sandboxes/introduction\n  Want to add a new agent harness? Checkout: https://github.com/tensorlakeai/harness-new\n\n  To begin run:\n  $ hermes setup\n\n' > /etc/motd
 RUN echo 'cat /etc/motd' >> /etc/bash.bashrc
 
