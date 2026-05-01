@@ -1,7 +1,18 @@
 FROM ubuntu-minimal
 RUN apt-get update && apt-get install -y ca-certificates curl libssl3 && rm -rf /var/lib/apt/lists/*
 RUN curl -fsSL https://forgecode.dev/cli | sh && cp $HOME/.local/bin/forge /usr/local/bin/forge
-RUN printf '╔══════════════════════════════════════════════════════╗\n║              Tensorlake Sandbox — Forge              ║\n╚══════════════════════════════════════════════════════╝\n\n  Docs: https://docs.tensorlake.ai/sandboxes/introduction\n  Want to add a new agent harness? Checkout: https://github.com/tensorlakeai/harness-new\n\n  To begin run:\n  $ forge\n\n' > /etc/motd
+RUN printf '%b\n' \
+    '\033[38;5;28m╔══════════════════════════════════════════════════════╗\033[0m' \
+    '\033[38;5;28m║\033[0m              \033[1;38;5;28mTensorlake Sandbox — Forge\033[0m              \033[38;5;28m║\033[0m' \
+    '\033[38;5;28m╚══════════════════════════════════════════════════════╝\033[0m' \
+    '' \
+    '  Docs: \033[36mhttps://docs.tensorlake.ai/sandboxes/introduction\033[0m' \
+    '  Want to add a new agent harness? Checkout: \033[36mhttps://github.com/tensorlakeai/harness-new\033[0m' \
+    '' \
+    '  To begin run:' \
+    '  \033[30;48;5;28m  $ forge  \033[0m' \
+    '' \
+    > /etc/motd
 RUN echo 'cat /etc/motd' >> /etc/bash.bashrc
 
 # Command to create the image in Tensorlake:

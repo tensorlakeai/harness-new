@@ -6,6 +6,7 @@ Community-maintained Dockerfiles for agent harnesses on [harness.new](https://ww
 
 | Harness | Dockerfile |
 |---|---|
+| Browser Harness | `harnesses/Dockerfile.browser` |
 | Claude Code | `harnesses/Dockerfile.claude` |
 | Codex | `harnesses/Dockerfile.codex` |
 | Custom | `harnesses/Dockerfile.custom` |

@@ -1,8 +1,49 @@
 FROM ubuntu-minimal
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 RUN apt-get update && apt-get install -y ca-certificates curl libssl3 && rm -rf /var/lib/apt/lists/*
 RUN npm install -g --prefix /usr @mariozechner/pi-coding-agent
-RUN printf '╔══════════════════════════════════════════════════════╗\n║              Tensorlake Sandbox — Pi                 ║\n╚══════════════════════════════════════════════════════╝\n\n  Docs: https://docs.tensorlake.ai/sandboxes/introduction\n  Want to add a new agent harness? Checkout: https://github.com/tensorlakeai/harness-new\n\n  To begin run:\n  $ pi\n\n' > /etc/motd
+RUN printf '%b\n' \
+    '\033[38;5;28m╔══════════════════════════════════════════════════════╗\033[0m' \
+    '\033[38;5;28m║\033[0m              \033[1;38;5;28mTensorlake Sandbox — Pi\033[0m                 \033[38;5;28m║\033[0m' \
+    '\033[38;5;28m╚══════════════════════════════════════════════════════╝\033[0m' \
+    '' \
+    '  Docs: \033[36mhttps://docs.tensorlake.ai/sandboxes/introduction\033[0m' \
+    '  Want to add a new agent harness? Checkout: \033[36mhttps://github.com/tensorlakeai/harness-new\033[0m' \
+    '' \
+    '  To begin run:' \
+    '  \033[30;48;5;28m  $ pi  \033[0m' \
+    '' \
+    > /etc/motd
 RUN echo 'cat /etc/motd' >> /etc/bash.bashrc
+RUN mv /usr/bin/pi /usr/bin/pi.real \
+ && printf '%s\n' \
+    '#!/bin/bash' \
+    '# Wrapper around pi that backfills curated system commands into pi'"'"'s' \
+    '# hermetic agent PATH (~/.pi/agent/bin) before invoking the real binary.' \
+    '# Runs as the invoking user so it works regardless of entry method.' \
+    'PI_BIN="$HOME/.pi/agent/bin"' \
+    'mkdir -p "$PI_BIN"' \
+    'for cmd in df du free uptime ps top kill killall pkill pgrep \' \
+    '           grep egrep fgrep sed awk cut tr sort uniq wc head tail tee tac less more \' \
+    '           find xargs file stat realpath readlink basename dirname \' \
+    '           tar gzip gunzip zip unzip bzip2 xz \' \
+    '           curl wget ping ip ss dig host nslookup traceroute \' \
+    '           which type env printenv date sleep timeout watch \' \
+    '           apt apt-get dpkg \' \
+    '           nano vi vim \' \
+    '           hostname uname id whoami groups \' \
+    '           lsblk mount \' \
+    '           expr seq yes; do' \
+    '  for d in /usr/bin /bin /usr/sbin /sbin; do' \
+    '    if [ -e "$d/$cmd" ] && [ ! -e "$PI_BIN/$cmd" ]; then' \
+    '      ln -s "$d/$cmd" "$PI_BIN/$cmd"' \
+    '      break' \
+    '    fi' \
+    '  done' \
+    'done' \
+    'exec /usr/bin/pi.real "$@"' \
+    > /usr/bin/pi \
+ && chmod +x /usr/bin/pi
 
 # Command to create the image in Tensorlake:
 # tl sbx image create ./Dockerfile.pi -n pi-harness-new-ui
