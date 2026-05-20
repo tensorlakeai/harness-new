@@ -1,4 +1,4 @@
-FROM ubuntu-minimal
+FROM tensorlake/ubuntu-minimal
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 RUN apt-get update && apt-get install -y ca-certificates curl libssl3 && rm -rf /var/lib/apt/lists/*
 RUN npm install -g --prefix /usr @mariozechner/pi-coding-agent

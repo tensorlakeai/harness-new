@@ -1,4 +1,4 @@
-FROM ubuntu-minimal
+FROM tensorlake/ubuntu-minimal
 RUN apt-get update
 RUN printf '%b\n' \
     '\033[38;5;28m╔══════════════════════════════════════════════════════╗\033[0m' \
