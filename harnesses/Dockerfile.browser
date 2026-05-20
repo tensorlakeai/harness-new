@@ -39,6 +39,12 @@ RUN git clone https://github.com/browser-use/browser-harness /opt/browser-harnes
  && HOME=/opt/uv-data UV_TOOL_BIN_DIR=/usr/bin uv tool install -e . \
  && chmod -R o+rX /opt/browser-harness /opt/uv-data
 
+# Workaround: drop /var/log/journal so BuildKit's tar export does not emit a
+# POSIX ACL PAX extension (system.posix_acl_access) that the Tensorlake rootfs
+# materializer currently rejects. systemd-journald.postinst sets the ACL when
+# libssl3's dependencies pull systemd in. Remove once the materializer fix lands.
+RUN rm -rf /var/log/journal
+
 # Wrapper: sane PATH for child shells, plus auto-start headless Chrome with CDP
 # on :9222 before invoking the real browser-harness CLI.
 RUN mv /usr/bin/browser-harness /usr/bin/browser-harness.real \
