@@ -29,4 +29,4 @@ jobs:
       - name: Build harness image
         env:
           TENSORLAKE_API_KEY: ${{ secrets.TENSORLAKE_API_KEY }}
-        run: tl sbx image create ./harnesses/Dockerfile.${{ inputs.harness_name }} -n ${{ inputs.harness_name }}
+        run: tl sbx image create ./harnesses/Dockerfile.${{ inputs.harness_name }} -n harnessnew/${{ inputs.harness_name }} --public
