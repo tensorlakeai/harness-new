@@ -1,7 +1,18 @@
 FROM tensorlake/ubuntu-minimal
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 RUN apt-get update && apt-get install -y ca-certificates curl libssl3 && rm -rf /var/lib/apt/lists/*
-RUN npm install -g --prefix /usr @mariozechner/pi-coding-agent
+RUN npm install --global --ignore-scripts pnpm@11.28.5 \
+  && mkdir -p /usr/lib/tensorlake-tools \
+  && pnpm --dir /usr/lib/tensorlake-tools \
+    --config.minimumReleaseAge=1440 \
+    --config.minimumReleaseAgeStrict=true \
+    --config.minimumReleaseAgeIgnoreMissingTime=false \
+    --config.trustLockfile=false \
+    --config.blockExoticSubdeps=true \
+    --config.strictDepBuilds=true \
+    --config.optimisticRepeatInstall=false \
+    add --ignore-scripts --save-exact @mariozechner/pi-coding-agent@0.73.1 \
+  && for executable in /usr/lib/tensorlake-tools/node_modules/.bin/*; do [ ! -e "$executable" ] || ln -sf "$executable" /usr/bin/; done
 RUN printf '%b\n' \
     '\033[38;5;28m╔══════════════════════════════════════════════════════╗\033[0m' \
     '\033[38;5;28m║\033[0m              \033[1;38;5;28mTensorlake Sandbox — Pi\033[0m                 \033[38;5;28m║\033[0m' \

@@ -1,6 +1,17 @@
 FROM tensorlake/ubuntu-minimal
 RUN apt-get update && apt-get install -y ca-certificates curl libssl3 && rm -rf /var/lib/apt/lists/*
-RUN npm install -g --prefix /usr @openai/codex
+RUN npm install --global --ignore-scripts pnpm@11.28.5 \
+  && mkdir -p /usr/lib/tensorlake-tools \
+  && pnpm --dir /usr/lib/tensorlake-tools \
+    --config.minimumReleaseAge=1440 \
+    --config.minimumReleaseAgeStrict=true \
+    --config.minimumReleaseAgeIgnoreMissingTime=false \
+    --config.trustLockfile=false \
+    --config.blockExoticSubdeps=true \
+    --config.strictDepBuilds=true \
+    --config.optimisticRepeatInstall=false \
+    add --ignore-scripts --save-exact @openai/codex@0.161.0 \
+  && for executable in /usr/lib/tensorlake-tools/node_modules/.bin/*; do [ ! -e "$executable" ] || ln -sf "$executable" /usr/bin/; done
 RUN mv /usr/bin/codex /usr/bin/codex.real \
  && printf '%s\n' \
     '#!/bin/bash' \
